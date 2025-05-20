@@ -6,11 +6,10 @@ from datetime import datetime
 
 st.set_page_config(page_title="Mood of the Queue", page_icon="🎭")
 
-# --- Header ---
 st.title("🎭 Mood of the Queue")
 st.write("Log how the ticket queue *feels* right now.")
 
-# --- Mood Logging Form ---
+# Recoding Mood
 with st.form("log_form"):
     mood = st.selectbox("Choose Mood", ["😊 Happy", "😠 Angry", "😕 Confused", "🎉 Celebratory"])
     note = st.text_input("Optional Note")
@@ -19,7 +18,7 @@ with st.form("log_form"):
         log_mood(mood, note)
         st.success("Mood Recorded Successfully!")
 
-# --- Mood Trend Visualization ---
+# Visualization
 st.subheader("📊 Mood Trend by Day")
 
 try:
@@ -28,12 +27,12 @@ try:
     data.columns = [col.strip().capitalize() for col in data.columns]
 
     if not data.empty and "Timestamp" in data.columns:
-        # 🛠️ Clean and parse timestamps
+        # Convert Timestamp to datetime and sort
         data["Timestamp"] = pd.to_datetime(data["Timestamp"], errors="coerce")
         data = data.dropna(subset=["Timestamp"])
         data = data.sort_values(by="Timestamp", ascending=False)
 
-        # 🗓️ Extract available dates
+        # Extract available dates
         available_dates = sorted(data["Timestamp"].dt.date.unique())
 
         if available_dates:
