@@ -1,6 +1,4 @@
-# 📊 Mood of the Queue
-
-A lightweight internal tool for tracking the emotional tone of customer support tickets throughout the day.
+## A lightweight internal tool for tracking the emotional tone of customer support tickets throughout the day.
 
 ---
 
